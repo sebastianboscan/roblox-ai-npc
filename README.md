@@ -4,7 +4,7 @@ An AI-driven Roblox NPC that translates natural-language chat instructions into 
 
 ## Example
 
-> "Hey, go open that white door for me and then grab that shiny object on the floor... actually don't pick up the shiny object, pick up the sword instead, and don't close the door on your way out."
+> "Go into the house, then pick up the medieval item. After that, close the door behind you, come to me, and then drop the sword (actually.. don't close the door behind you)"
 
 The NPC doesn't just react to keywords — the instruction goes to an LLM, which has to hold the whole sentence in context, recognize that the second half revises the first, and output a single final plan rather than acting on every clause literally.
 
@@ -20,12 +20,12 @@ The NPC doesn't just react to keywords — the instruction goes to an LLM, which
 
 ## Why constrain the output like this
 
-The LLM's only job is the hard part: turning messy natural language into intent. It doesn't touch the game world directly — it outputs a plan from a small fixed vocabulary, and deterministic Luau code does the actual execution. That split keeps the unpredictable part (the LLM) contained, and the risky part (manipulating game state) fully controlled and testable.
+The LLM's only job is the hard part: turning messy natural language into intent. It doesn't touch the game world directly, it outputs a plan from a small fixed vocabulary, and deterministic Luau code does the actual execution. That split keeps the unpredictable part (the LLM) contained, and the risky part (manipulating game state) fully controlled and testable.
 
 ## Setup
 
 1. Open the project in Roblox Studio.
-2. Add three `Part`s to `Workspace` named `WhiteDoor`, `Sword`, and `ShinyOrb`, plus an NPC model named `NPC` with a `Humanoid`.
+2. Add three `Part`s to `Workspace` named `WoodenDoor`, `Sword`, and `Trophy`, plus an NPC model named `NPC` with a `Humanoid`.
 3. Enable **Allow HTTP Requests** in Game Settings → Security (only needed if using an external LLM API instead of Roblox's native one).
 4. Place `NPCController.server.lua` in `ServerScriptService`.
 5. Press Play, type an instruction in chat, and watch the Output window for the raw LLM response and executed plan.
